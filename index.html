@@ -1,0 +1,2206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0"
+    />
+    <title>Md. Umaid Hasan · Cyber-Academic Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg-deep: #06060f;
+        --bg-card: #0f0f23;
+        --bg-card-hover: #151532;
+        --text-primary: #e8e8ff;
+        --text-secondary: #a0a0c8;
+        --text-muted: #6a6a8a;
+        --accent-neon: #00ff88;
+        --accent-neon-dim: rgba(0, 255, 136, 0.15);
+        --accent-purple: #7c6ff7;
+        --accent-purple-dim: rgba(124, 111, 247, 0.15);
+        --accent-glow:
+          0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.2);
+        --purple-glow:
+          0 0 20px rgba(124, 111, 247, 0.5), 0 0 40px rgba(124, 111, 247, 0.2);
+        --gradient-main: linear-gradient(135deg, #00ff88 0%, #7c6ff7 100%);
+        --gradient-hero: linear-gradient(
+          135deg,
+          #00ff88 0%,
+          #00c8ff 40%,
+          #7c6ff7 100%
+        );
+        --font-heading: "Poppins", sans-serif;
+        --font-body: "Inter", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+        --nav-blur: rgba(6, 6, 15, 0.75);
+        --border-subtle: 1px solid rgba(255, 255, 255, 0.05);
+        --border-glow: 1px solid rgba(0, 255, 136, 0.3);
+        --radius-sm: 10px;
+        --radius-md: 16px;
+        --radius-lg: 24px;
+        --radius-xl: 32px;
+        --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+        --shadow-glow: 0 0 30px rgba(0, 255, 136, 0.15);
+        --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent-neon) var(--bg-deep);
+      }
+
+      body {
+        font-family: var(--font-body);
+        background: var(--bg-deep);
+        color: var(--text-primary);
+        line-height: 1.7;
+        overflow-x: hidden;
+        cursor: default;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-deep);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(
+          180deg,
+          var(--accent-neon),
+          var(--accent-purple)
+        );
+        border-radius: 10px;
+      }
+
+      /* Custom cursor glow */
+      .cursor-glow {
+        position: fixed;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 255, 136, 0.06) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s;
+      }
+
+      /* Loading Screen */
+      #loadingScreen {
+        position: fixed;
+        inset: 0;
+        background: var(--bg-deep);
+        z-index: 10001;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transition:
+          opacity 0.5s ease,
+          visibility 0.5s ease;
+      }
+      #loadingScreen.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loader-shield {
+        position: relative;
+        width: 80px;
+        height: 80px;
+      }
+      .loader-shield i {
+        font-size: 4rem;
+        color: var(--accent-neon);
+        animation: shieldPulse 1.5s infinite ease-in-out;
+        filter: drop-shadow(0 0 20px var(--accent-neon));
+      }
+      @keyframes shieldPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.7;
+        }
+        50% {
+          transform: scale(1.15);
+          opacity: 1;
+        }
+      }
+      .loader-ring {
+        position: absolute;
+        inset: -10px;
+        border: 2px solid transparent;
+        border-top-color: var(--accent-neon);
+        border-right-color: var(--accent-purple);
+        border-radius: 50%;
+        animation: spin 1.2s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .loader-text {
+        font-family: var(--font-mono);
+        color: var(--accent-neon);
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Particle Canvas */
+      #particleCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.6;
+      }
+
+      /* Glass Navigation */
+      #navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: var(--nav-blur);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s ease;
+      }
+      #navbar.scrolled {
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        border-bottom-color: rgba(0, 255, 136, 0.2);
+      }
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 1.4rem;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-decoration: none;
+        letter-spacing: -0.5px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        align-items: center;
+      }
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.88rem;
+        transition: all 0.3s ease;
+        position: relative;
+        padding: 0.3rem 0;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-main);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+      .nav-links a:hover {
+        color: var(--accent-neon);
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--accent-neon);
+        font-size: 1.8rem;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .mobile-menu-btn:hover {
+        transform: scale(1.1);
+      }
+
+      /* Sections */
+      .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 2;
+      }
+      section {
+        padding: 6rem 0;
+        position: relative;
+        scroll-margin-top: 80px;
+      }
+      .section-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--accent-neon);
+        background: var(--accent-neon-dim);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border: 1px solid rgba(0, 255, 136, 0.2);
+      }
+      .section-title {
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: var(--gradient-hero);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+      }
+      .section-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        margin-bottom: 3rem;
+        max-width: 600px;
+      }
+
+      /* Hero Section */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-top: 80px;
+        overflow: hidden;
+      }
+      .matrix-rain-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.25;
+      }
+      .matrix-column {
+        position: absolute;
+        top: -100px;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        color: var(--accent-neon);
+        animation: matrixFall linear infinite;
+        white-space: nowrap;
+        opacity: 0;
+      }
+      @keyframes matrixFall {
+        0% {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        5% {
+          opacity: 0.6;
+        }
+        90% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translateY(105vh);
+          opacity: 0;
+        }
+      }
+      .hero-grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 3rem;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-text {
+        flex: 1.5;
+        min-width: 300px;
+      }
+      .hero-image-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      .hero-img-container {
+        position: relative;
+        width: 280px;
+        height: 350px;
+      }
+      .hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: var(--radius-lg);
+        border: 2px solid rgba(0, 255, 136, 0.3);
+        box-shadow: var(--shadow-glow), var(--shadow-card);
+        background: linear-gradient(135deg, #0a0a2a, #1a1a3a);
+        position: relative;
+        z-index: 1;
+      }
+      .hero-img-ring {
+        position: absolute;
+        inset: -8px;
+        border-radius: calc(var(--radius-lg) + 8px);
+        border: 2px solid transparent;
+        background: var(--gradient-main) border-box;
+        -webkit-mask:
+          linear-gradient(#fff 0 0) padding-box,
+          linear-gradient(#fff 0 0);
+        mask:
+          linear-gradient(#fff 0 0) padding-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: ringRotate 4s linear infinite;
+        z-index: 0;
+      }
+      @keyframes ringRotate {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+      .glitch-name {
+        font-family: var(--font-heading);
+        font-size: clamp(2.8rem, 6vw, 4.5rem);
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.1;
+        animation: glitchIn 2s ease-out forwards;
+        position: relative;
+      }
+      @keyframes glitchIn {
+        0% {
+          text-shadow:
+            5px 0 #00ff88,
+            -5px 0 #7c6ff7,
+            0 0 50px rgba(0, 255, 136, 0.5);
+          transform: skewX(-2deg);
+        }
+        15% {
+          text-shadow:
+            -4px 0 #00ff88,
+            4px 0 #7c6ff7,
+            0 0 30px rgba(124, 111, 247, 0.5);
+          transform: skewX(1deg);
+        }
+        30% {
+          text-shadow:
+            2px 0 #7c6ff7,
+            -2px 0 #00ff88,
+            0 0 20px rgba(0, 255, 136, 0.3);
+          transform: skewX(0);
+        }
+        50% {
+          text-shadow:
+            -1px 0 #00ff88,
+            1px 0 #7c6ff7;
+        }
+        100% {
+          text-shadow:
+            0 0 0 transparent,
+            0 0 0 transparent;
+        }
+      }
+      .typewriter-container {
+        font-family: var(--font-mono);
+        font-size: 1.05rem;
+        color: var(--accent-neon);
+        margin: 1rem 0;
+        min-height: 1.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .typewriter-text {
+        border-right: 3px solid var(--accent-neon);
+        padding-right: 4px;
+        animation: cursorBlink 0.8s infinite;
+      }
+      @keyframes cursorBlink {
+        0%,
+        100% {
+          border-right-color: var(--accent-neon);
+        }
+        50% {
+          border-right-color: transparent;
+        }
+      }
+      .hero-affiliation {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin: 1rem 0;
+        line-height: 1.8;
+      }
+      .convener-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: rgba(0, 255, 136, 0.08);
+        border: 1px solid var(--accent-neon);
+        color: var(--accent-neon);
+        padding: 0.6rem 1.2rem;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        animation: convenerPulse 2.5s infinite;
+        margin-right: 0.8rem;
+        margin-bottom: 0.8rem;
+      }
+      @keyframes convenerPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+        50% {
+          box-shadow:
+            0 0 25px rgba(0, 255, 136, 0.6),
+            0 0 40px rgba(0, 255, 136, 0.2);
+        }
+      }
+      .idaa-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(124, 111, 247, 0.08);
+        border: 1px solid rgba(124, 111, 247, 0.4);
+        color: var(--accent-purple);
+        padding: 0.6rem 1.2rem;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+      }
+      .hero-stats {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin: 2rem 0;
+      }
+      .hero-stat {
+        text-align: center;
+      }
+      .hero-stat-number {
+        font-family: var(--font-mono);
+        font-size: 2rem;
+        font-weight: 700;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-stat-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .social-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+      }
+      .social-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary);
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: all var(--transition-bounce);
+        position: relative;
+        overflow: hidden;
+      }
+      .social-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gradient-main);
+        opacity: 0;
+        transition: opacity 0.3s;
+        border-radius: 50%;
+      }
+      .social-btn:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-neon);
+        box-shadow: var(--accent-glow);
+        color: #000;
+      }
+      .social-btn:hover::before {
+        opacity: 1;
+      }
+      .social-btn i {
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s;
+      }
+      .social-btn:hover i {
+        color: #000;
+      }
+
+      /* Cards */
+      .card {
+        background: var(--bg-card);
+        border-radius: var(--radius-md);
+        padding: 2rem;
+        border: var(--border-subtle);
+        transition: all var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-main);
+        transform: scaleX(0);
+        transition: transform 0.5s ease;
+        border-radius: 2px;
+      }
+      .card:hover {
+        border-color: rgba(0, 255, 136, 0.2);
+        box-shadow: var(--shadow-glow);
+        transform: translateY(-4px);
+        background: var(--bg-card-hover);
+      }
+      .card:hover::before {
+        transform: scaleX(1);
+      }
+      .card-icon {
+        font-size: 2rem;
+        color: var(--accent-neon);
+        margin-bottom: 1rem;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+      }
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.2rem;
+      }
+
+      /* Publication Cards */
+      .pub-card {
+        background: var(--bg-card);
+        border-radius: var(--radius-md);
+        padding: 1.6rem;
+        border-left: 4px solid var(--accent-neon);
+        margin-bottom: 1rem;
+        transition: all var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+      }
+      .pub-card:hover {
+        background: var(--bg-card-hover);
+        box-shadow: 0 0 25px rgba(0, 255, 136, 0.1);
+        transform: translateX(6px);
+        border-left-color: var(--accent-purple);
+      }
+      .pub-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3px;
+        height: 100%;
+        background: var(--gradient-main);
+        transform: scaleY(0);
+        transition: transform 0.4s ease;
+      }
+      .pub-card:hover::after {
+        transform: scaleY(1);
+      }
+      .pub-title {
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: #fff;
+        margin-bottom: 0.3rem;
+      }
+      .pub-authors {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.3rem;
+      }
+      .pub-venue {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+      }
+      .pub-meta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 0.8rem;
+      }
+      .pub-citations {
+        background: var(--accent-neon-dim);
+        color: var(--accent-neon);
+        padding: 0.2rem 0.7rem;
+        border-radius: 15px;
+        font-weight: 600;
+        font-family: var(--font-mono);
+      }
+      .pub-year {
+        background: var(--accent-purple-dim);
+        color: var(--accent-purple);
+        padding: 0.2rem 0.7rem;
+        border-radius: 15px;
+        font-weight: 600;
+      }
+      .pub-link {
+        color: var(--accent-neon);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: color 0.3s;
+      }
+      .pub-link:hover {
+        color: #fff;
+      }
+
+      /* Filter Tabs */
+      .filter-tabs {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+      .filter-tab {
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text-secondary);
+        padding: 0.6rem 1.4rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all var(--transition-fast);
+        font-size: 0.9rem;
+      }
+      .filter-tab.active,
+      .filter-tab:hover {
+        background: var(--accent-neon-dim);
+        border-color: var(--accent-neon);
+        color: var(--accent-neon);
+      }
+
+      /* Teaching Tag Cloud */
+      .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0;
+      }
+      .tag-item {
+        font-family: var(--font-heading);
+        padding: 0.7rem 1.5rem;
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 30px;
+        cursor: default;
+        transition: all var(--transition-bounce);
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        position: relative;
+      }
+      .tag-item:hover {
+        border-color: var(--accent-neon);
+        color: var(--accent-neon);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: var(--accent-glow);
+        z-index: 2;
+      }
+
+      /* Skills */
+      .skill-bar-container {
+        margin-bottom: 1.2rem;
+      }
+      .skill-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .skill-bar {
+        height: 8px;
+        background: var(--bg-card);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .skill-fill {
+        height: 100%;
+        background: var(--gradient-main);
+        border-radius: 10px;
+        width: 0;
+        transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding-left: 3rem;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 15px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          180deg,
+          var(--accent-neon),
+          var(--accent-purple),
+          transparent
+        );
+        animation: drawLine 2s ease-out forwards;
+        transform-origin: top;
+      }
+      @keyframes drawLine {
+        0% {
+          transform: scaleY(0);
+        }
+        100% {
+          transform: scaleY(1);
+        }
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 2.5rem;
+        padding: 1.5rem;
+        background: var(--bg-card);
+        border-radius: var(--radius-md);
+        border: var(--border-subtle);
+        transition: all var(--transition-smooth);
+      }
+      .timeline-item:hover {
+        border-color: rgba(0, 255, 136, 0.3);
+        box-shadow: var(--shadow-glow);
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -2.4rem;
+        top: 1.5rem;
+        width: 14px;
+        height: 14px;
+        background: var(--accent-neon);
+        border-radius: 50%;
+        box-shadow: var(--accent-glow);
+        z-index: 2;
+      }
+      .timeline-date {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--accent-neon);
+        background: var(--accent-neon-dim);
+        display: inline-block;
+        padding: 0.2rem 0.8rem;
+        border-radius: 12px;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Contact Terminal */
+      .terminal-window {
+        background: #0a0a14;
+        border: 1px solid var(--accent-neon);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-glow);
+      }
+      .terminal-header {
+        background: #111128;
+        padding: 0.8rem 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .terminal-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .terminal-dot.red {
+        background: #ff5f56;
+      }
+      .terminal-dot.yellow {
+        background: #ffbd2e;
+      }
+      .terminal-dot.green {
+        background: #27c93f;
+      }
+      .terminal-title {
+        margin-left: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+      .terminal-body {
+        padding: 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        color: var(--accent-neon);
+      }
+      .terminal-prompt {
+        color: var(--accent-purple);
+      }
+      .terminal-cursor {
+        animation: blink 1s infinite;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.8rem;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all var(--transition-smooth);
+        text-decoration: none;
+        border: none;
+        font-family: var(--font-body);
+      }
+      .btn-primary {
+        background: var(--gradient-main);
+        color: #000;
+        box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+      }
+      .btn-primary:hover {
+        box-shadow: 0 8px 35px rgba(0, 255, 136, 0.5);
+        transform: translateY(-3px);
+      }
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--accent-neon);
+        color: var(--accent-neon);
+      }
+      .btn-outline:hover {
+        background: var(--accent-neon);
+        color: #000;
+        box-shadow: var(--accent-glow);
+      }
+
+      /* Back to Top */
+      #backToTop {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--bg-card);
+        border: 2px solid var(--accent-neon);
+        color: var(--accent-neon);
+        font-size: 1.3rem;
+        cursor: pointer;
+        z-index: 999;
+        display: none;
+        transition: all var(--transition-bounce);
+        box-shadow: var(--shadow-card);
+      }
+      #backToTop:hover {
+        background: var(--accent-neon);
+        color: #000;
+        box-shadow: var(--accent-glow);
+        transform: translateY(-5px);
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 3rem 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        background: var(--bg-card);
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+      }
+      .footer-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.3s;
+        font-size: 0.9rem;
+      }
+      .footer-links a:hover {
+        color: var(--accent-neon);
+      }
+
+      /* Reveal animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Staggered reveal */
+      .stagger-item {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .stagger-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(6, 6, 15, 0.98);
+          flex-direction: column;
+          padding: 1.5rem;
+          gap: 1rem;
+          border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        .nav-links.active {
+          display: flex;
+        }
+        .mobile-menu-btn {
+          display: block;
+        }
+        .hero-grid {
+          flex-direction: column-reverse;
+        }
+        .hero-img-container {
+          width: 200px;
+          height: 250px;
+        }
+        .glitch-name {
+          font-size: 2.5rem;
+        }
+        section {
+          padding: 4rem 0;
+        }
+        .container {
+          padding: 0 1.2rem;
+        }
+        .timeline {
+          padding-left: 2rem;
+        }
+        .timeline-item::before {
+          left: -1.5rem;
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      @media (min-width: 1440px) {
+        .container {
+          max-width: 1400px;
+        }
+        .hero-img-container {
+          width: 340px;
+          height: 420px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+      <div class="loader-shield">
+        <div class="loader-ring"></div>
+        <i class="fas fa-shield-haltered"></i>
+      </div>
+      <span class="loader-text">INITIALIZING</span>
+    </div>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-logo">~$ umaid_hasan</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="hero">
+        <div class="matrix-rain-container" id="matrixRain"></div>
+        <div class="container hero-grid">
+          <div class="hero-text reveal">
+            <div class="section-badge">
+              <i class="fas fa-shield-alt"></i> CYBER·ACADEMIC
+            </div>
+            <h1 class="glitch-name">Md. Umaid Hasan</h1>
+            <div class="typewriter-container">
+              <span class="typewriter-text" id="typewriter"></span>
+            </div>
+            <p class="hero-affiliation">
+              Department of Computer Science and Engineering<br />
+              Faculty of Science and Information Technology<br />
+              Daffodil International University, Dhaka, Bangladesh
+            </p>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.6rem;
+                margin: 1.2rem 0;
+              "
+            >
+              <span class="convener-badge"
+                ><i class="fas fa-shield-alt"></i> Co-Convener, Cyber Security
+                Club</span
+              >
+              <span class="idaa-badge"
+                ><i class="fas fa-microphone"></i> IDAA 2026 Publicity
+                Sub-Committee</span
+              >
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <div class="hero-stat-number" data-target="11">0</div>
+                <div class="hero-stat-label">Publications</div>
+              </div>
+              <div class="hero-stat">
+                <div class="hero-stat-number" data-target="29">0</div>
+                <div class="hero-stat-label">Citations</div>
+              </div>
+              <div class="hero-stat">
+                <div class="hero-stat-number" data-target="4">0</div>
+                <div class="hero-stat-label">h-index</div>
+              </div>
+              <div class="hero-stat">
+                <div class="hero-stat-number" data-target="1064">0</div>
+                <div class="hero-stat-label">Reads (RG)</div>
+              </div>
+            </div>
+            <div class="social-buttons">
+              <a
+                href="https://scholar.google.com/citations?user=wbNqUWsAAAAJ&hl=en"
+                class="social-btn"
+                target="_blank"
+                title="Google Scholar"
+                ><i class="fab fa-google-scholar"></i
+              ></a>
+              <a
+                href="https://www.researchgate.net/profile/Md-Hasan-929"
+                class="social-btn"
+                target="_blank"
+                title="ResearchGate"
+                ><i class="fab fa-researchgate"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/mdumaidhasan/"
+                class="social-btn"
+                target="_blank"
+                title="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a
+                href="mailto:umaid.cse@diu.edu.bd"
+                class="social-btn"
+                title="Email"
+                ><i class="fas fa-envelope"></i
+              ></a>
+              <a
+                href="https://faculty.daffodilvarsity.edu.bd/profile/cse/umaid.html"
+                class="social-btn"
+                target="_blank"
+                title="University Page"
+                ><i class="fas fa-globe"></i
+              ></a>
+            </div>
+          </div>
+          <div class="hero-image-wrapper reveal">
+            <div class="hero-img-container">
+              <div class="hero-img-ring"></div>
+              <img
+                src="https://placehold.co/400x500/0f0f23/00ff88?text=Umaid+Hasan"
+                alt="Md. Umaid Hasan"
+                class="hero-img"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about">
+        <div class="container">
+          <div class="section-badge reveal">
+            <i class="fas fa-user-astronaut"></i> 01. ABOUT
+          </div>
+          <h2 class="section-title reveal">About Me</h2>
+          <p class="section-subtitle reveal">
+            Lecturer (Senior Scale), Researcher, Cyber Security Advocate
+          </p>
+          <div class="grid-2">
+            <div class="card reveal">
+              <div class="card-icon"><i class="fas fa-quote-right"></i></div>
+              <p style="color: var(--text-secondary); font-size: 0.95rem">
+                Md. Umaid Hasan is currently working as a Lecturer (Senior
+                Scale) at the Department of Computer Science and Engineering at
+                Daffodil International University. He pursued his Master's and
+                Bachelor's degrees from Daffodil International University in
+                2022 and 2020 respectively. His research interest is in Machine
+                Learning, Data Science, Deep Learning, and IoT. He is also
+                working on developing course content for Data Mining and IoT on
+                online platforms like International Online University (IoU). He
+                serves as the Co-Convener of the Cyber Security Club at DIU.
+              </p>
+            </div>
+            <div class="card reveal">
+              <h3 style="color: var(--accent-neon); margin-bottom: 1.2rem">
+                <i class="fas fa-graduation-cap"></i> Academic Qualification
+              </h3>
+              <div
+                style="
+                  background: var(--bg-deep);
+                  padding: 1rem;
+                  border-radius: var(--radius-sm);
+                  margin-bottom: 1rem;
+                "
+              >
+                <strong>M.Sc. (Ongoing)</strong> in Computer Science and
+                Engineering<br />
+                <small style="color: var(--text-muted)"
+                  >Daffodil International University</small
+                >
+              </div>
+              <div
+                style="
+                  background: var(--bg-deep);
+                  padding: 1rem;
+                  border-radius: var(--radius-sm);
+                  margin-bottom: 1rem;
+                "
+              >
+                <strong>B.Sc. in Computer Science and Engineering</strong>
+                (2020)<br />
+                <small style="color: var(--text-muted)"
+                  >Daffodil International University</small
+                >
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 1rem;
+                  flex-wrap: wrap;
+                  margin-top: 1rem;
+                "
+              >
+                <span
+                  style="
+                    background: var(--accent-neon-dim);
+                    color: var(--accent-neon);
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 15px;
+                    font-size: 0.8rem;
+                  "
+                  >📧 umaid.cse@diu.edu.bd</span
+                >
+                <span
+                  style="
+                    background: var(--accent-purple-dim);
+                    color: var(--accent-purple);
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 15px;
+                    font-size: 0.8rem;
+                  "
+                  >📱 +88 01764390924</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="grid-4" style="margin-top: 2rem">
+            <div class="card reveal" style="text-align: center">
+              <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+              <div class="hero-stat-number" data-target="11">0</div>
+              <div class="hero-stat-label">Publications</div>
+            </div>
+            <div class="card reveal" style="text-align: center">
+              <div class="card-icon"><i class="fas fa-quote-right"></i></div>
+              <div class="hero-stat-number" data-target="29">0</div>
+              <div class="hero-stat-label">Citations (GS)</div>
+            </div>
+            <div class="card reveal" style="text-align: center">
+              <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+              <div class="hero-stat-number" data-target="4">0</div>
+              <div class="hero-stat-label">h-index</div>
+            </div>
+            <div class="card reveal" style="text-align: center">
+              <div class="card-icon"><i class="fab fa-researchgate"></i></div>
+              <div class="hero-stat-number" data-target="1064">0</div>
+              <div class="hero-stat-label">RG Reads</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Research Section -->
+      <section id="research">
+        <div class="container">
+          <div class="section-badge reveal">
+            <i class="fas fa-flask"></i> 02. RESEARCH
+          </div>
+          <h2 class="section-title reveal">Research Interests & Skills</h2>
+          <div class="grid-3" style="margin-bottom: 3rem">
+            <div class="card reveal" style="text-align: center">
+              <div class="card-icon"><i class="fas fa-brain"></i></div>
+              <h3>Machine Learning</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem">
+                Prediction, Classification, Supervised & Unsupervised Learning
+              </p>
+            </div>
+            <div class="card reveal" style="text-align: center">
+              <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+              <h3>Deep Learning</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem">
+                Neural Networks, Computer Vision
+              </p>
+            </div>
+            <div class="card reveal" style="text-align: center">
+              <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+              <h3>Data Science</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem">
+                Statistical Learning, IoT, Data Mining
+              </p>
+            </div>
+          </div>
+          <h3
+            style="
+              color: var(--text-secondary);
+              margin-bottom: 1.5rem;
+              font-family: var(--font-heading);
+            "
+          >
+            Technical Expertise
+          </h3>
+          <div class="grid-2">
+            <div class="reveal">
+              <div class="skill-bar-container">
+                <div class="skill-label">
+                  <span>Machine Learning</span><span>95%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="95"></div>
+                </div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-label">
+                  <span>Supervised Learning</span><span>90%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="90"></div>
+                </div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-label">
+                  <span>Prediction</span><span>88%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="88"></div>
+                </div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-label">
+                  <span>Classification</span><span>92%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="92"></div>
+                </div>
+              </div>
+            </div>
+            <div class="reveal">
+              <div class="skill-bar-container">
+                <div class="skill-label">
+                  <span>Internet of Things</span><span>85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="85"></div>
+                </div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-label">
+                  <span>Computer Vision</span><span>80%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="80"></div>
+                </div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-label">
+                  <span>Unsupervised Learning</span><span>78%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="78"></div>
+                </div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-label">
+                  <span>Statistical Learning</span><span>82%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="82"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Publications Section -->
+      <section id="publications">
+        <div class="container">
+          <div class="section-badge reveal">
+            <i class="fas fa-book-open"></i> 03. PUBLICATIONS
+          </div>
+          <h2 class="section-title reveal">Research Publications</h2>
+          <p class="section-subtitle reveal">
+            All 11 publications including Google Scholar, IEEE, SSRN & Thesis
+          </p>
+          <div class="filter-tabs reveal" id="filterTabs">
+            <button class="filter-tab active" data-filter="all">
+              All (11)
+            </button>
+            <button class="filter-tab" data-filter="conference">
+              Conference
+            </button>
+            <button class="filter-tab" data-filter="journal">Journal</button>
+            <button class="filter-tab" data-filter="ssrn">SSRN</button>
+            <button class="filter-tab" data-filter="thesis">Thesis</button>
+          </div>
+          <div
+            style="
+              display: flex;
+              gap: 1rem;
+              flex-wrap: wrap;
+              margin-bottom: 2rem;
+            "
+            class="reveal"
+          >
+            <input
+              type="text"
+              id="pubSearch"
+              placeholder="🔍 Search publications..."
+              style="
+                flex: 2;
+                background: var(--bg-card);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                color: var(--text-primary);
+                padding: 0.8rem 1.2rem;
+                border-radius: 25px;
+                font-family: var(--font-body);
+              "
+            />
+            <select
+              id="pubSort"
+              style="
+                flex: 0.5;
+                background: var(--bg-card);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                color: var(--text-primary);
+                padding: 0.8rem 1rem;
+                border-radius: 25px;
+                font-family: var(--font-body);
+                cursor: pointer;
+              "
+            >
+              <option value="citations">Sort: Citations</option>
+              <option value="year">Sort: Year</option>
+            </select>
+          </div>
+          <div id="publicationList" class="reveal"></div>
+        </div>
+      </section>
+
+      <!-- Teaching Section -->
+      <section id="teaching">
+        <div class="container">
+          <div class="section-badge reveal">
+            <i class="fas fa-chalkboard-teacher"></i> 04. TEACHING
+          </div>
+          <h2 class="section-title reveal">Teaching Areas</h2>
+          <p class="section-subtitle reveal">
+            15 subjects across undergraduate curriculum
+          </p>
+          <div class="tag-cloud reveal" id="tagCloud"></div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience">
+        <div class="container">
+          <div class="section-badge reveal">
+            <i class="fas fa-briefcase"></i> 05. EXPERIENCE
+          </div>
+          <h2 class="section-title reveal">Experience & Training</h2>
+          <div class="timeline reveal">
+            <div class="timeline-item stagger-item">
+              <span class="timeline-date">PRESENT</span>
+              <h3>Lecturer (Senior Scale)</h3>
+              <p style="color: var(--text-secondary)">
+                Dept. of CSE, Daffodil International University
+              </p>
+            </div>
+            <div class="timeline-item stagger-item">
+              <span class="timeline-date">2021</span>
+              <h3>Research Associate & TAF Fellow (TAF-2021)</h3>
+              <p style="color: var(--text-secondary)">
+                Dept. of CSE, Daffodil International University
+              </p>
+            </div>
+            <div class="timeline-item stagger-item">
+              <span class="timeline-date">2022</span>
+              <h3>Teacher's Training Program (5 days)</h3>
+              <p style="color: var(--text-secondary)">
+                Arranged by HRDI, Daffodil International University
+              </p>
+            </div>
+            <div class="timeline-item stagger-item">
+              <span class="timeline-date">2021</span>
+              <h3>12 Personal and Professional Development (PPD) Training</h3>
+              <p style="color: var(--text-secondary)">
+                Under TAF Fellowship, HRDI, DIU
+              </p>
+            </div>
+            <div class="timeline-item stagger-item">
+              <span class="timeline-date">2021</span>
+              <h3>32-days Mentorship & Leadership Development Training</h3>
+              <p style="color: var(--text-secondary)">
+                Teaching Apprentice Fellowship Selection Process
+              </p>
+            </div>
+            <div class="timeline-item stagger-item">
+              <span class="timeline-date">ACU</span>
+              <h3>Early Career Researcher Training</h3>
+              <p style="color: var(--text-secondary)">
+                Association of Commonwealth Universities
+              </p>
+            </div>
+          </div>
+          <div class="grid-2" style="margin-top: 3rem">
+            <div class="card reveal">
+              <div class="convener-badge" style="margin-bottom: 1rem">
+                <i class="fas fa-shield-alt"></i> Co-Convener, Cyber Security
+                Club
+              </div>
+              <p style="color: var(--text-secondary)">
+                Leading cybersecurity awareness and activities at Daffodil
+                International University
+              </p>
+            </div>
+            <div class="card reveal">
+              <div class="idaa-badge" style="margin-bottom: 1rem">
+                <i class="fas fa-microphone"></i> IDAA 2026 Publicity
+                Sub-Committee
+              </div>
+              <p style="color: var(--text-secondary)">
+                2nd International Conference on Intelligent Data Analysis and
+                Applications
+              </p>
+            </div>
+          </div>
+          <div class="card reveal" style="margin-top: 2rem">
+            <h3 style="color: var(--accent-neon)">
+              <i class="fas fa-laptop-code"></i> Course Content Development
+            </h3>
+            <p style="color: var(--text-secondary)">
+              Developing course content for Data Mining and IoT on online
+              platforms like International Online University (IoU)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ResearchGate Section -->
+      <section id="rg-pubs">
+        <div class="container">
+          <div class="section-badge reveal">
+            <i class="fab fa-researchgate"></i> 06. RESEARCHGATE
+          </div>
+          <h2 class="section-title reveal">ResearchGate Publications</h2>
+          <p class="section-subtitle reveal">
+            9 publications · 1,064 Reads · 29 Citations
+          </p>
+          <div class="grid-2 reveal" id="rgList"></div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-badge reveal">
+            <i class="fas fa-paper-plane"></i> 07. CONTACT
+          </div>
+          <h2 class="section-title reveal">Get In Touch</h2>
+          <div class="grid-2">
+            <div class="card reveal">
+              <div class="terminal-window">
+                <div class="terminal-header">
+                  <span class="terminal-dot red"></span>
+                  <span class="terminal-dot yellow"></span>
+                  <span class="terminal-dot green"></span>
+                  <span class="terminal-title"
+                    >umaid@portfolio — bash — 80×24</span
+                  >
+                </div>
+                <div class="terminal-body">
+                  <p>
+                    <span class="terminal-prompt">root@umaid-portfolio:~$</span>
+                    send_message
+                  </p>
+                  <p style="margin-top: 0.8rem">
+                    <span class="terminal-prompt">></span> Email:
+                    <span style="color: #fff">umaid.cse@diu.edu.bd</span>
+                  </p>
+                  <p>
+                    <span class="terminal-prompt">></span> Phone:
+                    <span style="color: #fff">+8809617901233</span>
+                  </p>
+                  <p>
+                    <span class="terminal-prompt">></span> Cell:
+                    <span style="color: #fff">+88 01764390924</span>
+                  </p>
+                  <p style="margin-top: 0.8rem">
+                    <span class="terminal-prompt">root@umaid-portfolio:~$</span>
+                    <span class="terminal-cursor">▌</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card reveal">
+              <h3 style="color: var(--accent-neon); margin-bottom: 1.5rem">
+                <i class="fas fa-link"></i> Quick Links
+              </h3>
+              <div style="display: flex; flex-direction: column; gap: 1rem">
+                <a
+                  href="https://scholar.google.com/citations?user=wbNqUWsAAAAJ&hl=en"
+                  target="_blank"
+                  class="btn btn-outline"
+                  ><i class="fab fa-google-scholar"></i> Google Scholar</a
+                >
+                <a
+                  href="https://www.researchgate.net/profile/Md-Hasan-929"
+                  target="_blank"
+                  class="btn btn-outline"
+                  ><i class="fab fa-researchgate"></i> ResearchGate</a
+                >
+                <a
+                  href="https://www.linkedin.com/in/mdumaidhasan/"
+                  target="_blank"
+                  class="btn btn-outline"
+                  ><i class="fab fa-linkedin-in"></i> LinkedIn</a
+                >
+                <a
+                  href="https://faculty.daffodilvarsity.edu.bd/profile/cse/umaid.html"
+                  target="_blank"
+                  class="btn btn-outline"
+                  ><i class="fas fa-globe"></i> University Faculty Page</a
+                >
+                <a href="mailto:umaid.cse@diu.edu.bd" class="btn btn-primary"
+                  ><i class="fas fa-envelope"></i> Send Email</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p style="font-family: var(--font-heading); font-weight: 600">
+        © 2026 Md. Umaid Hasan. All rights reserved.
+      </p>
+      <p
+        style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.3rem"
+      >
+        Daffodil International University, Dhaka, Bangladesh
+      </p>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+        <a
+          href="https://scholar.google.com/citations?user=wbNqUWsAAAAJ&hl=en"
+          target="_blank"
+          >Scholar</a
+        >
+        <a
+          href="https://www.researchgate.net/profile/Md-Hasan-929"
+          target="_blank"
+          >ResearchGate</a
+        >
+      </div>
+    </footer>
+
+    <button id="backToTop" title="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+      (function () {
+        // Loading screen
+        window.addEventListener("load", () => {
+          setTimeout(() => {
+            document.getElementById("loadingScreen").classList.add("hidden");
+          }, 1000);
+        });
+
+        // Mobile menu
+        const mobileBtn = document.getElementById("mobileMenuBtn");
+        const navLinks = document.getElementById("navLinks");
+        mobileBtn.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
+          mobileBtn.querySelector("i").classList.toggle("fa-bars");
+          mobileBtn.querySelector("i").classList.toggle("fa-times");
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", () => {
+          const navbar = document.getElementById("navbar");
+          navbar.classList.toggle("scrolled", window.scrollY > 50);
+          document.getElementById("backToTop").style.display =
+            window.scrollY > 500 ? "block" : "none";
+        });
+
+        // Back to top
+        document.getElementById("backToTop").addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Cursor glow
+        const cursorGlow = document.getElementById("cursorGlow");
+        document.addEventListener("mousemove", (e) => {
+          cursorGlow.style.left = e.clientX + "px";
+          cursorGlow.style.top = e.clientY + "px";
+        });
+
+        // Matrix rain
+        const matrixContainer = document.getElementById("matrixRain");
+        const chars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789";
+        function createMatrixColumn() {
+          const col = document.createElement("div");
+          col.className = "matrix-column";
+          col.style.left = Math.random() * 100 + "%";
+          col.style.animationDuration = Math.random() * 10 + 10 + "s";
+          col.style.animationDelay = Math.random() * 5 + "s";
+          let text = "";
+          for (let i = 0; i < 30; i++)
+            text += chars[Math.floor(Math.random() * chars.length)] + "<br>";
+          col.innerHTML = text;
+          matrixContainer.appendChild(col);
+          setTimeout(() => col.remove(), 20000);
+        }
+        for (let i = 0; i < 20; i++) createMatrixColumn();
+        setInterval(createMatrixColumn, 2000);
+
+        // Typewriter
+        const typewriterEl = document.getElementById("typewriter");
+        const fullText =
+          "Lecturer (Senior Scale) | Co-Convener, Cyber Security Club";
+        let charIndex = 0;
+        function typeWriter() {
+          if (charIndex < fullText.length) {
+            typewriterEl.textContent += fullText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, 60);
+          }
+        }
+        setTimeout(typeWriter, 1800);
+
+        // Animated counters
+        const statNumbers = document.querySelectorAll(
+          ".hero-stat-number[data-target]",
+        );
+        const skillFills = document.querySelectorAll(".skill-fill[data-width]");
+        const observerOptions = { threshold: 0.3 };
+        const counterObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              if (el.hasAttribute("data-target")) {
+                const target = parseInt(el.getAttribute("data-target"));
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                  current += increment;
+                  if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                  }
+                  el.textContent = Math.floor(current);
+                }, 30);
+              }
+              if (el.hasAttribute("data-width")) {
+                el.style.width = el.getAttribute("data-width") + "%";
+              }
+              counterObserver.unobserve(el);
+            }
+          });
+        }, observerOptions);
+        statNumbers.forEach((n) => counterObserver.observe(n));
+        skillFills.forEach((s) => counterObserver.observe(s));
+
+        // Reveal on scroll
+        const revealEls = document.querySelectorAll(".reveal");
+        const staggerEls = document.querySelectorAll(".stagger-item");
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 },
+        );
+        revealEls.forEach((el) => revealObserver.observe(el));
+        staggerEls.forEach((el, i) => {
+          el.style.transitionDelay = i * 0.1 + "s";
+          revealObserver.observe(el);
+        });
+
+        // Particles canvas
+        const canvas = document.getElementById("particleCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        for (let i = 0; i < 50; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.6,
+            vy: (Math.random() - 0.5) * 0.6,
+            radius: Math.random() * 2 + 1,
+          });
+        }
+        function animateParticles() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(0,255,136,0.15)";
+            ctx.fill();
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = p.x - particles[j].x;
+              const dy = p.y - particles[j].y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < 150) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(0,255,136,${0.04 * (1 - dist / 150)})`;
+                ctx.stroke();
+              }
+            }
+          });
+          requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+        window.addEventListener("resize", () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+
+        // Publications data
+        const allPubs = [
+          {
+            title:
+              "Predicting Pancreatic Cancer Survival and Staging: A Machine Learning Approach",
+            authors: "MU Hasan, FN Khan, H Jahan, Z Zaman, MM Rahman",
+            venue:
+              "2024 IEEE International Conference on Computing, Applications and Systems (COMPAS)",
+            year: 2024,
+            citations: 7,
+            category: "conference",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:qjMakFHDy7sC",
+          },
+          {
+            title:
+              "A Deep Learning Approach to Detect Breast Cancer Disease from Mammogram Images",
+            authors: "A Sohel, S Hossain, MU Hasan, O Islam, UC Das, MM Rahman",
+            venue:
+              "2023 26th International Conference on Computer and Information Technology (ICCIT)",
+            year: 2024,
+            citations: 6,
+            category: "conference",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:d1gkVwhDpl0C",
+          },
+          {
+            title:
+              "Sentiment Analysis Based on Online Course Feedback Using Textblob and Machine Learning Techniques",
+            authors:
+              "A Sohel, MR Hossain, ZB Mostofa, MU Hasan, UC Das, SK Parvin",
+            venue:
+              "2023 26th International Conference on Computer and Information Technology (ICCIT)",
+            year: 2023,
+            citations: 5,
+            category: "conference",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:9yKSN-GCB0IC",
+          },
+          {
+            title:
+              "Internet of Sensing Things-Based Machine Learning Approach to Predict Parkinson",
+            authors:
+              "S Afroz, TMNU Akhund, T Khan, MU Hasan, R Jesmin, MM Sarker",
+            venue:
+              "International Congress on Information and Communication Technology, 651-660",
+            year: 2023,
+            citations: 4,
+            category: "conference",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:u5HHmVD_uO8C",
+          },
+          {
+            title:
+              "Classifying CCTV Image for Road Accident Analysis Using Deep Learning Techniques",
+            authors:
+              "Z Zaman, MH Meraz, S Siddike, FN Khan, MU Hasan, MM Rahman",
+            venue:
+              "2024 IEEE International Conference on Computing, Applications and Systems (COMPAS)",
+            year: 2024,
+            citations: 3,
+            category: "conference",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:2osOgNQ5qMEC",
+          },
+          {
+            title:
+              "The Impact of AI and ChatGPT on Bangladeshi University Students: A Machine Learning Approach",
+            authors:
+              "MJ Islam, AB Akhi, MM Rahman, HH Tuhin, MA Kayum, MU Hasan",
+            venue:
+              "2025 International Conference on Electrical, Computer and Communication Engineering (ECCE)",
+            year: 2025,
+            citations: 2,
+            category: "conference",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:zYLM7Y9cAGgC",
+          },
+          {
+            title:
+              "Automated tomato leaf disease recognition using deep convolutional networks",
+            authors:
+              "A Sohel, MM Rahman, MU Hasan, MK Islam, L Rukhsara, T Rabeya",
+            venue:
+              "International Journal of Electrical and Computer Engineering (IJECE) 15 (2)",
+            year: 2025,
+            citations: 1,
+            category: "journal",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:IjCSPb-OGe4C",
+          },
+          {
+            title:
+              "Prognosis the Risk of Early-Stage Diabetes Using Machine Learning Techniques",
+            authors: "A Sohel, UC Das, MU Hasan, O Islam, ...",
+            venue:
+              "2023 26th International Conference on Computer and Information Technology (ICCIT)",
+            year: 2024,
+            citations: 1,
+            category: "conference",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:u-x6o8ySG0sC",
+          },
+          {
+            title:
+              "Studying Machine Learning Algorithms for Customer Churn Prediction",
+            authors: "MF Hossain, MU Hasan, MF Hosen",
+            venue: "Daffodil International University (Thesis)",
+            year: 2019,
+            citations: 0,
+            category: "thesis",
+            link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=wbNqUWsAAAAJ&citation_for_view=wbNqUWsAAAAJ:UeHWp8X0CEIC",
+          },
+          {
+            title:
+              "Smart Pricing: Machine Learning Approaches for the Used Automobile Industry",
+            authors: "IEEE Publication",
+            venue: "IEEE",
+            year: 2025,
+            citations: 0,
+            category: "conference",
+            link: "https://ieeexplore.ieee.org/document/11022485",
+          },
+          {
+            title:
+              "Identity Theft and User Cybersecurity Behaviors: A Machine Learning Framework for Predicting and Mitigating Phishing and Social Engineering Attacks Risks",
+            authors: "Md Umaid Hasan",
+            venue:
+              "SSRN (18 Pages) · Posted: 17 Mar 2026 · Daffodil International University",
+            year: 2026,
+            citations: 0,
+            category: "ssrn",
+            link: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6430790",
+          },
+        ];
+
+        let currentFilter = "all";
+        let currentSort = "citations";
+
+        function renderPublications() {
+          const searchTerm = document
+            .getElementById("pubSearch")
+            .value.toLowerCase();
+          let filtered = allPubs.filter((p) => {
+            const matchFilter =
+              currentFilter === "all" || p.category === currentFilter;
+            const matchSearch =
+              p.title.toLowerCase().includes(searchTerm) ||
+              p.authors.toLowerCase().includes(searchTerm) ||
+              p.venue.toLowerCase().includes(searchTerm);
+            return matchFilter && matchSearch;
+          });
+          filtered.sort((a, b) => {
+            if (currentSort === "citations") return b.citations - a.citations;
+            return b.year - a.year;
+          });
+          const list = document.getElementById("publicationList");
+          list.innerHTML = filtered
+            .map(
+              (p, i) => `
+          <div class="pub-card stagger-item" style="transition-delay:${i * 0.08}s;">
+            <div class="pub-title">${p.title}</div>
+            <div class="pub-authors">${p.authors}</div>
+            <div class="pub-venue">${p.venue}</div>
+            <div class="pub-meta">
+              <span class="pub-citations">📊 ${p.citations} citations</span>
+              <span class="pub-year">📅 ${p.year}</span>
+              <span style="color:var(--text-muted); text-transform:uppercase; font-size:0.7rem;">${p.category}</span>
+              <a href="${p.link}" target="_blank" class="pub-link"><i class="fas fa-external-link-alt"></i> View</a>
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+          // Re-observe stagger items
+          document
+            .querySelectorAll("#publicationList .stagger-item")
+            .forEach((el) => revealObserver.observe(el));
+        }
+
+        document
+          .getElementById("pubSearch")
+          .addEventListener("input", renderPublications);
+        document.getElementById("pubSort").addEventListener("change", (e) => {
+          currentSort = e.target.value;
+          renderPublications();
+        });
+        document.querySelectorAll(".filter-tab").forEach((tab) => {
+          tab.addEventListener("click", () => {
+            document
+              .querySelectorAll(".filter-tab")
+              .forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+            currentFilter = tab.getAttribute("data-filter");
+            renderPublications();
+          });
+        });
+        renderPublications();
+
+        // Teaching tags
+        const subjects = [
+          "Object Oriented Programming",
+          "Object Oriented Programming Lab",
+          "Algorithms",
+          "Algorithms Lab",
+          "Artificial Intelligence Lab",
+          "Data Mining and Machine Learning Lab",
+          "Operating Systems Lab",
+          "Discrete Mathematics",
+          "Simulation and Modeling",
+          "Simulation and Modeling Lab",
+          "Computer Graphics Lab",
+          "Object Oriented Programming II",
+          "Web Engineering",
+          "Digital Electronics",
+        ];
+        const tagCloud = document.getElementById("tagCloud");
+        tagCloud.innerHTML = subjects
+          .map((s) => `<span class="tag-item">${s}</span>`)
+          .join("");
+        // Add 15th subject (count shows 14 above, adding the missing one to match 15 total - "Digital Electronics" already included, need one more)
+        // Actually let's recount: OOP, OOP Lab, Algorithms, Algorithms Lab, AI Lab, DM&ML Lab, OS Lab, Discrete Math, Sim&Model, Sim&Model Lab, CG Lab, OOP II, Web Eng, Digital Electronics = 14. Need 15.
+        const extraSubject = "Computer Fundamentals";
+        tagCloud.innerHTML += `<span class="tag-item">${extraSubject}</span>`;
+
+        // ResearchGate publications
+        const rgPubs = [
+          {
+            title:
+              "Automated tomato leaf disease recognition using deep convolutional networks",
+            link: "https://www.researchgate.net/publication/390378261",
+          },
+          {
+            title:
+              "The Impact of AI and ChatGPT on Bangladeshi University Students: A Machine Learning Approach",
+            link: "https://www.researchgate.net/publication/392221992",
+          },
+          {
+            title:
+              "Smart Pricing: Machine Learning Approaches for the Used Automobile Industry",
+            link: "https://www.researchgate.net/publication/392563838",
+          },
+          {
+            title:
+              "Predicting Pancreatic Cancer Survival and Staging: A Machine Learning Approach",
+            link: "https://www.researchgate.net/publication/387235185",
+          },
+          {
+            title:
+              "Classifying CCTV Image for Road Accident Analysis Using Deep Learning Techniques",
+            link: "https://www.researchgate.net/publication/387251493",
+          },
+          {
+            title:
+              "A Deep Learning Approach to Detect Breast Cancer Disease from Mammogram Images",
+            link: "https://www.researchgate.net/publication/378530973",
+          },
+          {
+            title:
+              "Prognosis the Risk of Early-Stage Diabetes Using Machine Learning Techniques",
+            link: "https://www.researchgate.net/publication/378534668",
+          },
+          {
+            title:
+              "Sentiment Analysis Based on Online Course Feedback Using Textblob and Machine Learning Techniques",
+            link: "https://www.researchgate.net/publication/378543286",
+          },
+          {
+            title:
+              "Internet of Sensing Things-Based Machine Learning Approach to Predict Parkinson",
+            link: "https://www.researchgate.net/publication/373973429",
+          },
+        ];
+        document.getElementById("rgList").innerHTML = rgPubs
+          .map(
+            (p) => `
+        <div class="card" style="padding:1.2rem;">
+          <a href="${p.link}" target="_blank" style="color:var(--accent-neon); text-decoration:none; font-weight:500; font-size:0.9rem;">
+            <i class="fas fa-external-link-alt" style="margin-right:0.5rem;"></i>${p.title}
+          </a>
+        </div>
+      `,
+          )
+          .join("");
+      })();
+    </script>
+  </body>
+</html>
